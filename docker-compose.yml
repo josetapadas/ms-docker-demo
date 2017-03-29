@@ -1,3 +1,4 @@
+
 version: '2'
 services:
   database:
@@ -9,11 +10,29 @@ services:
   web:
     links:
       - database
+      - redis
     build: .
     volumes:
       - .:/opt/yetanotherrailsapp
     ports:
       - '9292:9292'
     command: [bundle, exec, puma]
+    env_file:
+      - '.env'
+  redis:
+    image: 'redis:3.2-alpine'
+    command: [redis-server]
+    ports:
+      - '6379:6379'
+    volumes:
+      - './data/redisdata:/var/lib/redis/data'
+  sidekiq:
+    links:
+      - database
+      - redis:foo.redis.server
+    build: .
+    command: [bundle, exec, sidekiq]
+    volumes:
+      - .:/opt/yetanotherrailsapp
     env_file:
       - '.env'
