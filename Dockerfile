@@ -15,6 +15,7 @@ RUN apt-get update \
 ENV APP_HOME /opt/yetanotherrailsapp
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
+ADD . $APP_HOME
 
 ENV GEM_HOME /opt/yetanotherrailsapp/vendor/bundle
 ENV PATH $GEM_HOME/bin:$PATH
