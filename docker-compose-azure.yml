@@ -26,6 +26,7 @@ services:
     volumes:
       - './data/redisdata:/var/lib/redis/data'
   sidekiq:
+    image: yara
     links:
       - database
       - redis:foo.redis.server

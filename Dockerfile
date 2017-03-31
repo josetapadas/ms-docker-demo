@@ -24,4 +24,5 @@ ENV PATH $GEM_HOME/bin:$PATH
 ENV BUNDLE_PATH $GEM_HOME
 ENV BUNDLE_BIN $BUNDLE_PATH/bin
 
-RUN [bundle, install]
+RUN bundle install
+
